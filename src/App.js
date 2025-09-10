@@ -447,9 +447,7 @@ function Background() {
     <div
       aria-hidden
       className="fixed inset-0 -z-10 
-      bg-[radial-gradient(circle_at_1px_1px,rgba(28,25,23,0.08)_1px,transparent_1px)] 
-      [background-size:18px_18px] 
-      bg-[rgba(244,189,29,0.15)]"      />
+      bg-gradient-to-b from-[#F4BD1D]/25 to-[#6A498E]/15"      />
   );
 }
 const ACCESS_CODE = (process.env.REACT_APP_ACCESS_CODE || "").trim();
