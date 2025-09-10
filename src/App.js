@@ -239,7 +239,7 @@ function MembersPage({ data }) {
             return (
               <div
               key={idx}
-              className={`rounded-2xl border border-white/25 backdrop-blur-xl shadow-2xl p-5 ${theme.card}`}
+              className={`rounded-2xl border border-white/25 backdrop-blur-l shadow-xl p-5 ${theme.card}`}
             >
               {/* One row; constrain left side so the row fits */}
               <div className="flex items-center justify-between gap-2 overflow-hidden">
