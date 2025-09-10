@@ -238,58 +238,52 @@ function MembersPage({ data }) {
 
             return (
               <div
-                key={idx}
-                className={`rounded-2xl border border-white/25 backdrop-blur-xl shadow-2xl p-5 ${theme.card}`}
-              >
-                <div className="flex items-center justify-between gap-3 mb-3">
-                <div className="flex items-center gap-3">
-                  <div className={`h-11 w-11 rounded-full flex items-center justify-center font-bold ${theme.avatar}`}>
+              key={idx}
+              className={`rounded-2xl border border-white/25 backdrop-blur-xl shadow-2xl p-5 ${theme.card}`}
+            >
+              {/* One row; constrain left side so the row fits */}
+              <div className="flex items-center justify-between gap-2 overflow-hidden">
+                {/* LEFT: avatar + name + pills; capped width on mobile */}
+                <div className="flex items-center gap-2 min-w-0 basis-0 flex-grow max-w-[72vw] sm:max-w-none">
+                  <div className={`h-11 w-11 rounded-full flex items-center justify-center font-bold ${theme.avatar} shrink-0`}>
                     {member?.[0]?.toUpperCase() ?? "S"}
                   </div>
-
-                  {/* name + medal + bubble */}
-                  <div className="flex flex-col">
-                    <div className="flex items-center gap-2">
-                      <div className="text-lg font-bold text-stone-900">{member}</div>
-                      {medalEmoji && (
-                        <span
-                          className="text-2xl"
-                          aria-label={rank === 1 ? "Gold medal" : rank === 2 ? "Silver medal" : "Bronze medal"}
-                          title={rank === 1 ? "Gold" : rank === 2 ? "Silver" : "Bronze"}
-                        >
-                          {medalEmoji}
-                        </span>
-                      )}
+            
+                  <div className="min-w-0 flex-1">
+                    {/* name + medal (name can truncate) */}
+                    <div className="flex items-center gap-2 min-w-0">
+                      <div className="text-lg font-bold text-stone-900 truncate">
+                        {member}
+                      </div>
+                      {medalEmoji && <span className="text-2xl shrink-0">{medalEmoji}</span>}
                     </div>
-
-                    <div className="flex flex-wrap gap-2 mt-1">
+            
+                    {/* pills: single line, scroll horizontally if needed */}
+                    <div className="flex gap-2 mt-1 flex-wrap">
                       {klass && (
-                        <div
-                          className={`px-3 py-1 rounded-full text-xs font-semibold ${theme.memberPill}`}
-                        >
+                        <div className={`px-3 py-1 rounded-full text-xs font-semibold ${theme.memberPill} shrink-0`}>
                           Class: {klass}
                         </div>
                       )}
                       {positions.map((pos, i) => (
-                        <div
-                          key={i}
-                          className={`px-3 py-1 rounded-full text-xs font-semibold ${theme.memberPill}`}
-                        >
+                        <div key={i} className={`px-3 py-1 rounded-full text-xs font-semibold ${theme.memberPill} shrink-0`}>
                           {pos}
                         </div>
                       ))}
                     </div>
                   </div>
-
-                  </div>
-                  <div className="flex flex-col items-end">
-                    <div className="text-5xl font-extrabold text-stone-900">{pointsNum}</div>
-                    <div className="text-base font-semibold text-stone-600">
-                      point{Math.abs(pointsNum) === 1 ? "" : "s"}
-                    </div>
+                </div>
+            
+                {/* RIGHT: points — fixed width, never wraps */}
+                <div className="flex flex-col items-end shrink-0 whitespace-nowrap pl-1">
+                  <div className="text-4xl sm:text-5xl font-extrabold text-stone-900 leading-none">{pointsNum}</div>
+                  <div className="text-sm sm:text-base font-semibold text-stone-600">
+                    point{Math.abs(pointsNum) === 1 ? "" : "s"}
                   </div>
                 </div>
               </div>
+            </div>
+            
             );
           })
         )}
@@ -433,7 +427,7 @@ function Nav() {
           {/* Right: nav */}
           <div className="flex flex-wrap md:flex-nowrap items-center gap-2">
             <NavLink to="/" end className={({ isActive }) => `${linkBase} ${isActive ? active : inactive}`}>
-              Members
+              Brothers
             </NavLink>
             <NavLink to="/updates" className={({ isActive }) => `${linkBase} ${isActive ? active : inactive}`}>
               Updates
@@ -583,7 +577,7 @@ export default function App() {
           <div className="mx-auto max-w-6xl px-4 mt-6">
             <div className="rounded-2xl border border-white/20 bg-white/40 backdrop-blur-md shadow p-4 flex items-center gap-3">
               <div className="h-3 w-3 rounded-full bg-[#F4BD1D] animate-ping" />
-              <div className="text-stone-800 font-medium">Fetching SAE data…</div>
+              <div className="text-stone-800 font-medium">Fetching ΣAE data…</div>
             </div>
           </div>
         )}
